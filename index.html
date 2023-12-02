@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Waffle Christmas Decorations Pricing</title>
+  <style>
+    /* Simple CSS for the layout */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    input[type="number"] {
+      padding: 8px;
+      margin-top: 10px;
+    }
+    #priceBox {
+      border: 2px solid #ccc;
+      width: 200px;
+      height: 100px;
+      line-height: 100px;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div>
+    <label for="quantity">Enter quantity:</label><br>
+    <input type="number" id="quantity" name="quantity" min="1" oninput="calculateAndUpdate()">
+  </div>
+  <div id="priceBox">0 kr</div>
+</div>
+
+<script>
+  function calculateAndUpdate() {
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const price = calculatePrice(quantity);
+    document.getElementById('priceBox').innerText = `${price} kr`;
+  }
+
+  function calculatePrice(quantity) {
+    if (quantity < 1) {
+      return 0;
+    } else if (quantity === 1) {
+      return 150;
+    } else if (quantity === 2) {
+      return 250;
+    } else if (quantity === 3) {
+      return 300;
+    } else {
+      const batchesOfThree = Math.floor(quantity / 3);
+      const remaining = quantity % 3;
+      let totalPrice = batchesOfThree * 300; // Calculating batches of 3 with the price 300
+      if (remaining === 1) {
+        totalPrice += 150; // Add the cost of one waffle
+      } else if (remaining === 2) {
+        totalPrice += 250; // Add the cost of two waffles
+      }
+      return totalPrice;
+    }
+  }
+</script>
+
+</body>
+</html>
