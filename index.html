@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prissetting for Vaffeljuledekorasjoner</title>
+  <title>Waffle Christmas Decorations Pricing</title>
   <style>
     /* Dark mode styles */
     body {
@@ -30,15 +29,6 @@
       margin: 0 auto;
       background-color: #1c1c1c;
     }
-    .btn {
-      padding: 15px;
-      font-size: 20px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      width: 100%;
-      color: #333; /* Dark text color */
-    }
     .red {
       background-color: #dd6761;
       color: #fff;
@@ -51,6 +41,18 @@
       background-color: #80a66c;
       color: #fff;
     }
+    .btn {
+      padding: 15px;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      color: #333; /* Dark text color */
+    }
+    .btn:hover {
+      opacity: 0.8; /* Hover opacity */
+    }
     #priceBox {
       border: 2px solid #ccc;
       border-radius: 10px;
@@ -60,6 +62,7 @@
       font-size: 24px;
       margin-top: 20px;
       background-color: #1c1c1c;
+      color: #fff;
     }
   </style>
 </head>
@@ -67,56 +70,63 @@
 
 <div class="container">
   <div class="button-container">
-    <!-- Buttons from 1 to 30 -->
-    <button class="btn red" onclick="selectQuantity(1)">1</button>
-    <button class="btn yellow" onclick="selectQuantity(2)">2</button>
-    <button class="btn green" onclick="selectQuantity(3)">3</button>
-    <button class="btn red" onclick="selectQuantity(4)">4</button>
-    <button class="btn yellow" onclick="selectQuantity(5)">5</button>
-    <button class="btn green" onclick="selectQuantity(6)">6</button>
-    <button class="btn red" onclick="selectQuantity(7)">7</button>
-    <button class="btn yellow" onclick="selectQuantity(8)">8</button>
-    <button class="btn green" onclick="selectQuantity(9)">9</button>
-    <button class="btn red" onclick="selectQuantity(10)">10</button>
-    <button class="btn yellow" onclick="selectQuantity(11)">11</button>
-    <button class="btn green" onclick="selectQuantity(12)">12</button>
-    <button class="btn red" onclick="selectQuantity(13)">13</button>
-    <button class="btn yellow" onclick="selectQuantity(14)">14</button>
-    <button class="btn green" onclick="selectQuantity(15)">15</button>
-    <button class="btn red" onclick="selectQuantity(16)">16</button>
-    <button class="btn yellow" onclick="selectQuantity(17)">17</button>
-    <button class="btn green" onclick="selectQuantity(18)">18</button>
-    <button class="btn red" onclick="selectQuantity(19)">19</button>
-    <button class="btn yellow" onclick="selectQuantity(20)">20</button>
-    <button class="btn green" onclick="selectQuantity(21)">21</button>
-    <button class="btn red" onclick="selectQuantity(22)">22</button>
-    <button class="btn yellow" onclick="selectQuantity(23)">23</button>
-    <button class="btn green" onclick="selectQuantity(24)">24</button>
-    <button class="btn red" onclick="selectQuantity(25)">25</button>
-    <button class="btn yellow" onclick="selectQuantity(26)">26</button>
-    <button class="btn green" onclick="selectQuantity(27)">27</button>
-    <button class="btn red" onclick="selectQuantity(28)">28</button>
-    <button class="btn yellow" onclick="selectQuantity(29)">29</button>
-    <button class="btn green" onclick="selectQuantity(30)">30</button>
+    <!-- Buttons -->
+    <button class="btn red" onclick="calculateAndUpdate(1)">1</button>
+    <button class="btn yellow" onclick="calculateAndUpdate(2)">2</button>
+    <button class="btn green" onclick="calculateAndUpdate(3)">3</button>
+    <!-- Create buttons from 4 to 30 -->
+    <!-- I'll generate the buttons using JavaScript for convenience -->
+    <script>
+      for (let i = 4; i <= 30; i++) {
+        let colorClass = '';
+        if (i % 3 === 1) {
+          colorClass = 'red';
+        } else if (i % 3 === 2) {
+          colorClass = 'yellow';
+        } else {
+          colorClass = 'green';
+        }
+        document.write(`<button class="btn ${colorClass}" onclick="calculateAndUpdate(${i})">${i}</button>`);
+      }
+    </script>
   </div>
   <div id="priceBox">0 kr</div>
 </div>
 
 <script>
-  function selectQuantity(quantity) {
-    let price = 0;
-    if (quantity === 1) {
-      price = 150;
-    } else if (quantity === 2) {
-      price = 250;
-    } else if (quantity === 3) {
-      price = 300;
-    } else {
-      const remainder = quantity % 3;
-      const setsOfThree = Math.floor(quantity / 3);
-      price = (setsOfThree * 300) + (remainder * 150);
-    }
+  function calculateAndUpdate(quantity) {
+    const price = calculatePrice(quantity);
     document.getElementById('priceBox').innerText = `${price} kr`;
+  }
+
+  function calculatePrice(quantity) {
+    if (quantity < 1) {
+      return 0;
+    } else if (quantity === 1) {
+      return 150;
+    } else if (quantity === 2) {
+      return 250;
+    } else if (quantity === 3) {
+      const batchesOfThree = Math.floor(quantity / 3);
+      const remaining = quantity % 3;
+      let totalPrice = batchesOfThree * 300;
+      if (remaining === 1) {
+        totalPrice += 150;
+      } else if (remaining === 2) {
+        totalPrice += 250;
+      }
+      return totalPrice;
+    } else {
+      const batchesOfThree = Math.floor(quantity / 3);
+      const remaining = quantity % 3;
+      let totalPrice = batchesOfThree * 300;
+      if (remaining === 1) {
+        totalPrice += 150;
+      } else if (remaining === 2) {
+        totalPrice += 250;
+      }
+      return totalPrice;
+    }
   }
 </script>
 
