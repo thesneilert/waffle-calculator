@@ -18,7 +18,7 @@ This is a simple web application that calculates the price of waffle-themed Chri
 
 ## How to Use
 
-1. Open the HTML file in a web browser.
+1. Open the [page](https://thesneilert.github.io/waffle-calculator/) in a web browser.
 2. Click on the quantity buttons (1 to 30) to calculate the price of waffle decorations.
 3. The price will be displayed in the center box.
 
